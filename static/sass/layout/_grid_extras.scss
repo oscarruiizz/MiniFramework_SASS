@@ -1,4 +1,5 @@
 @use '../base/variables' as vars;
+@use '../base/gutter' as gutter;
 
 @each $breakpoint, $size in vars.$breakpoints {
     @media (min-width: #{$size}) {
@@ -10,3 +11,16 @@
         }
     }
 }
+
+@each $breakpoint, $size in vars.$breakpoints {
+    @media (min-width: #{$size}) {
+      @each $num, $sp in gutter.$spacing-sizes {
+        .gx-#{$breakpoint}-#{$num} {
+          --gutter-x: #{$sp};
+        }
+        .gy-#{$breakpoint}-#{$num} {
+          --gutter-y: #{$sp};
+        }
+      }
+    }
+  }
