@@ -1,26 +1,32 @@
 @use '../base/variables' as vars;
 @use '../base/gutter' as gutter;
+@use '../base/globals' as *;
 
-@each $breakpoint, $size in vars.$breakpoints {
-    @media (min-width: #{$size}) {
-        @for $i from 1 through vars.$grid-columns {
-            .col-#{$breakpoint}-#{$i} {
-                flex: 0 0 calc($i / vars.$grid-columns * $i);
-                max-width: calc( $i/ vars.$grid-columns * $i);
+@if $generate-responsive-classes {
+    @each $breakpoint, $size in vars.$breakpoints {
+        @media (min-width: #{$size}) {
+            @for $i from 1 through vars.$grid-columns {
+                .col-#{$breakpoint}-#{$i} {
+                    flex: 0 0 calc($i / vars.$grid-columns * $i);
+                    max-width: calc($i/ vars.$grid-columns * $i);
+                }
             }
         }
     }
 }
 
-@each $breakpoint, $size in vars.$breakpoints {
-    @media (min-width: #{$size}) {
-      @each $num, $sp in gutter.$spacing-sizes {
-        .gx-#{$breakpoint}-#{$num} {
-          --gutter-x: #{$sp};
+@if $generate-responsive-classes {
+    @each $breakpoint, $size in vars.$breakpoints {
+        @media (min-width: #{$size}) {
+            @each $num, $sp in gutter.$spacing-sizes {
+                .gx-#{$breakpoint}-#{$num} {
+                    --gutter-x: #{$sp};
+                }
+
+                .gy-#{$breakpoint}-#{$num} {
+                    --gutter-y: #{$sp};
+                }
+            }
         }
-        .gy-#{$breakpoint}-#{$num} {
-          --gutter-y: #{$sp};
-        }
-      }
     }
-  }
+}

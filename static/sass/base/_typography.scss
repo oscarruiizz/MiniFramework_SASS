@@ -1,12 +1,15 @@
+@use '../base/globals' as *;
 /* Tipografía */
 @use 'sass:list';
 
 $font-sizes: 0.875rem, 1rem, 1.25rem, 1.5rem, 2rem;
 
-@each $size in $font-sizes {
-    $index: list.index($font-sizes, $size);
-    
-    .fs-#{$index} {
-        font-size: $size;
+@if $generate-responsive-classes {
+    @each $size in $font-sizes {
+        $index: list.index($font-sizes, $size);
+
+        .fs-#{$index} {
+            font-size: $size;
+        }
     }
 }
